@@ -1,0 +1,25 @@
+{
+  "name": "weather-forecast-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "doc": "nodemon -w doc/*.yml src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "swagger-ui-express": "^4.1.6",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
