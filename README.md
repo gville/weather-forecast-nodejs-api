@@ -1,1 +1,3 @@
 # weather-forecast-nodejs-api
+
+I want to share with you my solution to a code challenge that was sent to me as part of a job application process. The code challenge was to create an API from scratch with NodeJs. First I had to import data from a json file into a mongodb database. Then I had to document the API in swagger. And finally I had to develop the API according to the functional requirements. As a bonus, I added some extra improvements that were not required, such as the use of containers with Docker.

@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Weather Forecast API
+  description: This API allows us to query weather forecasts such as the next time it will rain 
+    or the temperature expected for certain dates, times and locations.
+  version: 0.0.1
+
+servers:
+  - url: http://localhost:5000
+
+components:
+  parameters:
+    location:
+      in: query
+      name: location
+      required: true
+      schema:
+        type: string
+      example: 'London'
+    datetime:
+      in: query
+      name: datetime
+      required: true
+      schema:
+        type: string
+        format: date-time
+      example: '2021-01-24T10:00:00.000Z'
+  
+  responses:
+    NotFound:
+      description: Forecast is not possible.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Missing or invalid parameter(s).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+      example:
+        status: 404
+        message: 'Not found'
+
+paths:
+  /forecast:
+    get:
+      summary: Returns temperature and chain of rain for a specified location and date/time.
+      description: When date/time is not contained in any provided range, it will return the values related to the nearest range of hours in the day.
+      parameters:
+        - $ref: '#/components/parameters/location'
+        - $ref: '#/components/parameters/datetime'
+      responses:
+        '200':
+          description: A forecast object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  temp:
+                    type: number
+                    format: float
+                    example: 30.5
+                  rain:
+                    type: integer
+                    format: int32
+                    example: 22
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /next-rain:
+    get:
+      summary: For a specified city and date/time, the endpoint returns the next time it will rain after the given date/time.
+      description: In order to rain the probability has to be greater than 70%.
+      parameters:
+        - $ref: '#/components/parameters/location'
+        - $ref: '#/components/parameters/datetime'
+      responses:
+        '200':
+          description: A next-rain object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  datetime:
+                    type: string
+                    format: date-time
+                    example: '2021-01-21T16:00:00.000Z'
+        '404':
+          $ref: '#/components/responses/NotFound'
