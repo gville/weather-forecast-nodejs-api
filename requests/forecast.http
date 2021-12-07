@@ -1,0 +1,15 @@
+###
+GET http://localhost:5000/api/forecast?location=London&datetime=2021-01-22T17:00:00.000Z
+
+###
+GET http://localhost:5000/api/next-rain?location=London&datetime=2021-01-22T17:00:00.000Z
+
+###
+GET http://localhost:5000/api/forecast?location=London&location=London&datetime=2021-01-22T17:00:00.000Z&datetime=2021-01-22T17:00:00.000Z
+
+###
+GET http://localhost:5000/api/forecast
+
+
+###
+GET http://localhost:5000/api/hello
